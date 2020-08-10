@@ -9,7 +9,14 @@ const companies = [
   { name: 'Company Six', category: 'Finance', start: 1987, end: 2010 },
   { name: 'Company Seven', category: 'Auto', start: 1986, end: 1996 },
   { name: 'Company Eight', category: 'Technology', start: 2011, end: 2016 },
-  { name: 'Company Nine', category: 'Retail', start: 1981, end: 1989 }
+  { name: 'Company Nine', category: 'Retail', start: 1981, end: 1989 },
+];
+
+const people = [
+  { name: 'bob', age: 20, position: 'developer' },
+  { name: 'anna', age: 30, position: 'designer' },
+  { name: 'john', age: 35, position: 'the boss' },
+  { name: 'jane', age: 22, position: 'intern' },
 ];
 
 const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
@@ -18,7 +25,7 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 //   console.log(companies[i]);
 // }
 
-// FOR EACH
+//? FOR EACH
 // companies.forEach(company => {
 //   console.log(company);
 // });
@@ -27,7 +34,7 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 //   console.log(company.name);
 // });
 
-// FILTER
+//? FILTER
 // let canDrink = [];
 // for (let i = 0; i < ages.length; i++) {
 //   if (ages[i] >= 21) {
@@ -41,19 +48,19 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 //   }
 // });
 
-// Use ES6 arrow function for same code above
+//! Use ES6 arrow function for same code above
 // const canDrink = ages.filter(age => age >= 21);
 
 // console.log(canDrink);
 
-// Filter retail companies
+//! Filter retail companies
 // const retailCompanies = companies.filter(function(company) {
 //   if (company.category === 'Retail') {
 //     return true;
 //   }
 // });
 
-// Use ES6 arrow function
+//! Use ES6 arrow function
 // const retailCompanies = companies.filter(
 //   company => company.category === 'Retail'
 // );
@@ -69,7 +76,7 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 // );
 // console.log(lastedTenYears);
 
-// MAP - CREATES NEW ARRAY FROM EXISTING ARRAY
+//? MAP - CREATES NEW ARRAY FROM EXISTING ARRAY
 // const companyNames = companies.map(company => {
 //   return company.name;
 // });
@@ -80,7 +87,7 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 //   return `${company.name} [${company.start} - ${company.end}]`;
 // });
 
-// ES6 shorthand method
+//! ES6 shorthand method
 // const testMap = companies.map(
 //   company => `${company.name} [${company.start} - ${company.end}]`
 // );
@@ -91,11 +98,31 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 // console.log(agesSquare);
 // console.log(agesTimesTwo);
 
-// Can put map statements together
+const peopleAges = people.map((person) => person.age);
+
+console.log(peopleAges);
+
+const newPeople = people.map((person) => {
+  return {
+    firstName: person.name.toUpperCase(),
+    oldAge: person.age + 20,
+  };
+});
+
+console.log(newPeople);
+
+const names = people
+  .map((person) => `<h3>${person.name.toUpperCase()}</h3>`)
+  .join('');
+const result = document.getElementById('result');
+
+result.innerHTML = names;
+
+// !Can put map statements together
 // const ageMap = ages.map(age => Math.sqrt(age)).map(age => age * 2);
 // console.log(ageMap);
 
-// SORT
+//? SORT
 // const sortedCompanies = companies.sort(function(c1, c2) {
 //   if (c1.start > c2.start) {
 //     return 1;
@@ -108,14 +135,14 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 // const sortedCompanies = companies.sort((a, b) => (a.start > b.start ? 1 : -1));
 // console.log(sortedCompanies);
 
-// Sort ascending
+//! Sort ascending
 // const sortAges = ages.sort((a, b) => a - b);
 
-// Sort descending
+//! Sort descending
 // const sortAges = ages.sort((a, b) => b - a);
 // console.log(sortAges);
 
-// REDUCE
+//? REDUCE
 // let ageSum = 0;
 // for (let i = 0; i < ages.length; i++) {
 //   ageSum += ages[i];
@@ -128,7 +155,7 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 // const ageSum = ages.reduce((total, age) => total + age, 0);
 // console.log(ageSum);
 
-// Get total years for all retailCompanies.
+//! Get total years for all retailCompanies.
 // const totalYears = companies.reduce(function(total, company) {
 //   return total + (company.end - company.start);
 // }, 0);
@@ -139,11 +166,11 @@ const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
 // );
 // console.log(totalYears);
 
-// COMBINE Methods
-const combined = ages
-  .map(age => age * 2)
-  .filter(age => age >= 40)
-  .sort((a, b) => a - b)
-  .reduce((total, age) => total + age, 0);
+//? COMBINE Methods
+// const combined = ages
+//   .map((age) => age * 2)
+//   .filter((age) => age >= 40)
+//   .sort((a, b) => a - b)
+//   .reduce((total, age) => total + age, 0);
 
-console.log(combined);
+// console.log(combined);
